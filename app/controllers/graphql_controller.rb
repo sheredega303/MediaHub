@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 class GraphqlController < ApplicationController
-  # If accessing from outside this domain, nullify the session
-  # This allows for outside API access while preventing CSRF attacks,
-  # but you'll have to authenticate your user separately
-  # protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token # without it u can get error when u try to send request from postman
 
   def execute
     variables = prepare_variables(params[:variables])
@@ -40,7 +37,7 @@ class GraphqlController < ApplicationController
       else
         {}
       end
-    when Hash
+    when ActionDispatch::Http::UploadedFile, Hash
       variables_param
     when ActionController::Parameters
       variables_param.to_unsafe_hash # GraphQL-Ruby will validate name and type of incoming variables.
