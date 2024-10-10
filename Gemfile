@@ -33,6 +33,7 @@ gem 'active_storage_validations'
 gem 'apollo_upload_server'
 gem 'aws-sdk-s3'
 gem 'bootsnap', require: false
+gem 'cancancan'
 gem 'devise'
 gem 'devise-jwt'
 gem 'fasterer', require: false

@@ -7,6 +7,9 @@ module Mutations
 
     def resolve(id:)
       video = Video.find_or_initialize_by(id: id)
+
+      authorize! :destroy, video
+
       if video.destroy
         { status: I18n.t('video_deleted'), errors: [] }
       else

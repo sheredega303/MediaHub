@@ -10,6 +10,9 @@ module Mutations
 
     def resolve(id:, title:, description:, age_rating:)
       video = Video.find_or_initialize_by(id: id)
+
+      authorize! :update, video
+
       if video.update(title: title, description: description, age_rating: age_rating)
         { video: video, errors: [] }
       else
