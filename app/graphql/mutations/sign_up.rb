@@ -1,6 +1,7 @@
 module Mutations
   class SignUp < BaseMutation
     argument :email, String, required: true
+    argument :channel_name, String
     argument :password, String, required: true
     argument :password_confirmation, String, required: true
 
@@ -8,11 +9,12 @@ module Mutations
     field :token, String, null: true
     field :errors, [String], null: false
 
-    def resolve(email:, password:, password_confirmation:)
+    def resolve(email:, password:, password_confirmation:, channel_name:)
       user = User.new(
         email: email,
         password: password,
-        password_confirmation: password_confirmation
+        password_confirmation: password_confirmation,
+        channel_name: channel_name
       )
 
       if user.save
