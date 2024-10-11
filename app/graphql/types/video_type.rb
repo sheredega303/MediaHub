@@ -7,9 +7,14 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :file_url, String, null: false
+    field :author, Types::UserType, null: false
 
     def file_url
       object.file.url
+    end
+
+    def author
+      object.user
     end
   end
 end

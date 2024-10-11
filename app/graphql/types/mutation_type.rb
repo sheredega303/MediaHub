@@ -10,5 +10,7 @@ module Types
     field :create_video, mutation: Mutations::CreateVideo
     field :update_video, mutation: Mutations::UpdateVideo
     field :delete_video, mutation: Mutations::DeleteVideo
+
+    field :update_role, mutation: Mutations::UpdateRole
   end
 end
