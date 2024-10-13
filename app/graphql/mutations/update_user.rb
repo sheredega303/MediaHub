@@ -9,7 +9,7 @@ module Mutations
     def resolve(id:, channel_name:)
       user = User.find_or_initialize_by(id: id)
 
-      authorize! :update, user
+      authorize!(:update, user)
 
       if user.update(channel_name: channel_name)
         { user: user, errors: [] }
