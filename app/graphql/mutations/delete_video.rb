@@ -6,7 +6,7 @@ module Mutations
     field :errors, [String], null: false
 
     def resolve(id:)
-      video = Video.find_or_initialize_by(id: id)
+      video = Video.find_by(id: id)
       if video.destroy
         { status: I18n.t('video_deleted'), errors: [] }
       else
