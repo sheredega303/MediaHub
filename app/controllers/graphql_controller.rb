@@ -25,8 +25,8 @@ class GraphqlController < ApplicationController
     return if request.headers['Authorization'].blank?
 
     token = request.headers['Authorization'].split.last
-    user_id = JWT.decode(token, ENV.fetch('JWT_SECRET_KEY', nil))[0]['sub']
-    User.find(user_id)
+    user_id = JWT.decode(token, ENV.fetch('JWT_SECRET_KEY') { nil })[0]['sub']
+    User.find_by(id: user_id)
   end
 
   # Handle variables in form data, JSON body, or a blank value

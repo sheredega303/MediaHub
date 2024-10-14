@@ -39,6 +39,7 @@ gem 'devise-jwt'
 gem 'fasterer', require: false
 gem 'graphql'
 gem 'overcommit', require: false
+gem 'rolify'
 gem 'rubocop', require: false
 gem 'rubocop-performance'
 gem 'rubocop-rails'
