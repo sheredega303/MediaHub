@@ -7,6 +7,9 @@ module Mutations
 
     def resolve(id:)
       user = User.find_by(id: id)
+
+      authorize!(:destroy, user)
+
       if user.destroy
         { status: I18n.t('user_deleted'), errors: [] }
       else
