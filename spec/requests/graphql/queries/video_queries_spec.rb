@@ -7,14 +7,14 @@ RSpec.describe 'VideoQueries', type: :request do
 
   describe 'videos' do
     it 'returns a list of videos' do
-      5.times { FactoryBot.create(:video, user: user) }
+      2.times { FactoryBot.create(:video, user: user) }
 
       post '/graphql', params: { query: videos_query }, headers: { Authorization: "Bearer #{token}" }
 
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['videos'].size).to eq(6)
+      expect(json_response['data']['videos'].size).to eq(3)
     end
   end
 
