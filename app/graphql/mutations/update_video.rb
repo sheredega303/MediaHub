@@ -9,9 +9,9 @@ module Mutations
     field :errors, [String], null: false
 
     def resolve(id:, title:, description:, age_rating:)
-      video = Video.find_or_initialize_by(id: id)
+      video = Video.find_by(id: id)
 
-      authorize! :update, video
+      authorize!(:update, video)
 
       if video.update(title: title, description: description, age_rating: age_rating)
         { video: video, errors: [] }

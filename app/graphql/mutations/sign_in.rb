@@ -11,17 +11,9 @@ module Mutations
       user = User.find_by(email: email)
       if user&.valid_password?(password)
         token = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil).first
-        {
-          user: user,
-          token: token,
-          errors: []
-        }
+        { user: user, token: token, errors: [] }
       else
-        {
-          user: nil,
-          token: nil,
-          errors: [I18n.t('sign_in_error')]
-        }
+        { user: nil, token: nil, errors: [I18n.t('sign_in_error')] }
       end
     end
   end

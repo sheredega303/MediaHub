@@ -7,9 +7,9 @@ module Mutations
     field :errors, [String], null: false
 
     def resolve(id:, channel_name:)
-      user = User.find_or_initialize_by(id: id)
+      user = User.find_by(id: id)
 
-      authorize! :update, user
+      authorize!(:update, user)
 
       if user.update(channel_name: channel_name)
         { user: user, errors: [] }
