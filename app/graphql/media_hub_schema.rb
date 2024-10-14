@@ -7,6 +7,9 @@ class MediaHubSchema < GraphQL::Schema
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
 
+  max_query_string_tokens(5000)
+  validate_max_errors(100)
+
   class << self
     # GraphQL-Ruby calls this when something goes wrong while running a query:
     # def type_error(err, context)
@@ -23,14 +26,6 @@ class MediaHubSchema < GraphQL::Schema
       # to return the correct GraphQL object type for `obj`
       raise(GraphQL::RequiredImplementationMissingError)
     end
-
-    # Limit the size of incoming queries:
-    max_query_string_tokens(5000)
-
-    # Stop validating when it encounters this many errors:
-    validate_max_errors(100)
-
-    # Relay-style Object Identification:
 
     # Return a string UUID for `object`
     def id_from_object(object, _type_definition, _query_ctx)
