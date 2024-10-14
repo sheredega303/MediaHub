@@ -19,17 +19,9 @@ module Mutations
 
       if user.save
         token = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil).first
-        {
-          user: user,
-          token: token,
-          errors: []
-        }
+        { user: user, token: token, errors: [] }
       else
-        {
-          user: nil,
-          token: nil,
-          errors: user.errors.full_messages
-        }
+        { user: nil, token: nil, errors: user.errors.full_messages }
       end
     end
   end

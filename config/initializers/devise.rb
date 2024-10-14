@@ -243,9 +243,9 @@ Devise.setup do |config|
   # config.encryptor = :sha512
 
   # ==> Scopes configuration
-  # Turn scoped views1 on. Before rendering "sessions/new", it will first check for
+  # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
-  # are using only default views1.
+  # are using only default views.
   # config.scoped_views = false
 
   # Configure the default scope given to Warden. By default it's the first
@@ -308,7 +308,7 @@ Devise.setup do |config|
   config.responder.redirect_status = :see_other
 
   config.jwt do |jwt|
-    jwt.secret = ENV.fetch('JWT_SECRET_KEY', 'JWT_KEY')
+    jwt.secret = ENV.fetch('JWT_SECRET_KEY') { 'JWT_KEY' }
     jwt.dispatch_requests = [
       ['POST', %r{^/graphql$}]
     ]
