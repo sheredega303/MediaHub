@@ -38,6 +38,7 @@ gem 'devise'
 gem 'devise-jwt'
 gem 'fasterer', require: false
 gem 'graphql'
+gem 'graphql_playground-rails'
 gem 'overcommit', require: false
 gem 'rolify'
 gem 'rubocop', require: false

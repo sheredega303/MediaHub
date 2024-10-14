@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
+  mount GraphqlPlayground::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
   post '/graphql', to: 'graphql#execute'
 
   constraints ->(request) { request.path.exclude?('active_storage') } do
