@@ -3,5 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable
 
+  validates :channel_name, length: { maximum: 100 }
+
   has_many :videos, dependent: :destroy
 end

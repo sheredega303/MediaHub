@@ -1,3 +1,5 @@
 en:
   no_route: "Route not found"
   sign_in_error: "Invalid username or password"
+  video_deleted: "Video was successful deleted"
+  user_deleted: "User was successful deleted"
