@@ -43,6 +43,9 @@ Rails/ApplicationController:
 Rails/EnvironmentVariableAccess:
   Enabled: false
 
+Naming/MethodParameterName:
+  Enabled: false
+
 RSpec/LetSetup:
   Enabled: false
 
@@ -53,7 +56,7 @@ Metrics/AbcSize:
   Max: 25
 
 Metrics/MethodLength:
-  Max: 15
+  Max: 20
 
 Metrics/BlockLength:
   Exclude:
