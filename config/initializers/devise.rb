@@ -308,7 +308,7 @@ Devise.setup do |config|
   config.responder.redirect_status = :see_other
 
   config.jwt do |jwt|
-    jwt.secret = ENV.fetch('JWT_SECRET_KEY', 'JWT_KEY')
+    jwt.secret = ENV.fetch('JWT_SECRET_KEY') { 'JWT_KEY' }
     jwt.dispatch_requests = [
       ['POST', %r{^/graphql$}]
     ]

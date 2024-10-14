@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GraphqlController < ApplicationController
+  skip_before_action :verify_authenticity_token # without it u can get error when u try to send request from postman
   include Exceptionable
 
   def execute
@@ -37,7 +38,7 @@ class GraphqlController < ApplicationController
       else
         {}
       end
-    when Hash
+    when ActionDispatch::Http::UploadedFile, Hash
       variables_param
     when ActionController::Parameters
       variables_param.to_unsafe_hash # GraphQL-Ruby will validate name and type of incoming variables.
