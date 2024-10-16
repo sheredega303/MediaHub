@@ -10,7 +10,11 @@ module Types
     field :author, Types::UserType, null: false
 
     def file_url
-      object.file.url
+      if Rails.env.test?
+        Rails.application.routes.url_helpers.rails_blob_path(object.file, only_path: true)
+      else
+        object.file.url
+      end
     end
 
     def author
