@@ -10,9 +10,9 @@ RSpec.describe 'SignInMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['signIn']['user']['email']).to eq(user.email)
-      expect(json_response['data']['signIn']['token']).to be_present
-      expect(json_response['data']['signIn']['errors']).to be_empty
+      expect(json_response.dig('data', 'signIn', 'user', 'email')).to eq(user.email)
+      expect(json_response.dig('data', 'signIn', 'token')).to be_present
+      expect(json_response.dig('data', 'signIn', 'errors')).to be_empty
     end
 
     it 'does not sign in a user with invalid email' do
@@ -21,9 +21,9 @@ RSpec.describe 'SignInMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['signIn']['user']).to be_nil
-      expect(json_response['data']['signIn']['token']).to be_nil
-      expect(json_response['data']['signIn']['errors']).to include(I18n.t('sign_in_error'))
+      expect(json_response.dig('data', 'signIn', 'user')).to be_nil
+      expect(json_response.dig('data', 'signIn', 'token')).to be_nil
+      expect(json_response.dig('data', 'signIn', 'errors')).to include(I18n.t('sign_in_error'))
     end
 
     it 'does not sign in a user with invalid password' do
@@ -32,9 +32,9 @@ RSpec.describe 'SignInMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['signIn']['user']).to be_nil
-      expect(json_response['data']['signIn']['token']).to be_nil
-      expect(json_response['data']['signIn']['errors']).to include(I18n.t('sign_in_error'))
+      expect(json_response.dig('data', 'signIn', 'user')).to be_nil
+      expect(json_response.dig('data', 'signIn', 'token')).to be_nil
+      expect(json_response.dig('data', 'signIn', 'errors')).to include(I18n.t('sign_in_error'))
     end
   end
 

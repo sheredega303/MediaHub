@@ -17,8 +17,8 @@ RSpec.describe 'UpdateRoleMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['updateRole']['user']['id']).to eq(user.id.to_s)
-      expect(json_response['data']['updateRole']['errors']).to be_empty
+      expect(json_response.dig('data', 'updateRole', 'user', 'id')).to eq(user.id.to_s)
+      expect(json_response.dig('data', 'updateRole', 'errors')).to be_empty
     end
 
     it 'remove a role from another user' do
@@ -28,8 +28,8 @@ RSpec.describe 'UpdateRoleMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['updateRole']['user']['id']).to eq(manager.id.to_s)
-      expect(json_response['data']['updateRole']['errors']).to be_empty
+      expect(json_response.dig('data', 'updateRole', 'user', 'id')).to eq(manager.id.to_s)
+      expect(json_response.dig('data', 'updateRole', 'errors')).to be_empty
     end
 
     it 'returns a permission error when trying to update another user role' do
@@ -39,7 +39,7 @@ RSpec.describe 'UpdateRoleMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'].first['message']).to include('You have no access to this action')
+      expect(json_response.dig('errors', 0, 'message')).to include('You have no access to this action')
     end
   end
 

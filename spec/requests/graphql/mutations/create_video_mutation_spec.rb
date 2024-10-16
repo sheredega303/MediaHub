@@ -27,8 +27,8 @@ RSpec.describe 'CreateVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['createVideo']['video']['title']).to eq('Sample Video')
-      expect(json_response['data']['createVideo']['errors']).to be_empty
+      expect(json_response.dig('data', 'createVideo', 'video', 'title')).to eq('Sample Video')
+      expect(json_response.dig('data', 'createVideo', 'errors')).to be_empty
     end
 
     it 'returns error when user is not authorized' do
@@ -53,8 +53,8 @@ RSpec.describe 'CreateVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['createVideo']['video']).to be_nil
-      expect(json_response['data']['createVideo']['errors']).not_to be_empty
+      expect(json_response.dig('data', 'createVideo', 'video')).to be_nil
+      expect(json_response.dig('data', 'createVideo', 'errors')).not_to be_empty
     end
 
     it 'returns errors when invalid arguments' do
@@ -77,7 +77,7 @@ RSpec.describe 'CreateVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'][0]['message']).not_to be_empty
+      expect(json_response.dig('errors', 0, 'message')).not_to be_empty
     end
   end
 

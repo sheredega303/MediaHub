@@ -20,8 +20,8 @@ RSpec.describe 'DeleteVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['deleteVideo']['status']).to eq(I18n.t('video_deleted'))
-      expect(json_response['data']['deleteVideo']['errors']).to be_empty
+      expect(json_response.dig('data', 'deleteVideo', 'status')).to eq(I18n.t('video_deleted'))
+      expect(json_response.dig('data', 'deleteVideo', 'errors')).to be_empty
     end
 
     it 'delete video by admin' do
@@ -32,8 +32,8 @@ RSpec.describe 'DeleteVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['deleteVideo']['status']).to eq(I18n.t('video_deleted'))
-      expect(json_response['data']['deleteVideo']['errors']).to be_empty
+      expect(json_response.dig('data', 'deleteVideo', 'status')).to eq(I18n.t('video_deleted'))
+      expect(json_response.dig('data', 'deleteVideo', 'errors')).to be_empty
     end
 
     it 'delete video by manager' do
@@ -44,8 +44,8 @@ RSpec.describe 'DeleteVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['deleteVideo']['status']).to eq(I18n.t('video_deleted'))
-      expect(json_response['data']['deleteVideo']['errors']).to be_empty
+      expect(json_response.dig('data', 'deleteVideo', 'status')).to eq(I18n.t('video_deleted'))
+      expect(json_response.dig('data', 'deleteVideo', 'errors')).to be_empty
     end
 
     it 'returns error when user is not authorized' do
@@ -56,7 +56,7 @@ RSpec.describe 'DeleteVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'][0]['message']).to include('You have no access to this action')
+      expect(json_response.dig('errors', 0, 'message')).to include('You have no access to this action')
     end
 
     it 'returns error when user has not permission to update video' do
@@ -67,7 +67,7 @@ RSpec.describe 'DeleteVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'][0]['message']).to include('You have no access to this action')
+      expect(json_response.dig('errors', 0, 'message')).to include('You have no access to this action')
     end
   end
 

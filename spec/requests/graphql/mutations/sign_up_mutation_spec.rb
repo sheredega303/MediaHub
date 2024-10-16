@@ -26,9 +26,9 @@ RSpec.describe 'SignUpMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['signUp']['user']['email']).to eq(valid_attributes[:email])
-      expect(json_response['data']['signUp']['token']).to be_present
-      expect(json_response['data']['signUp']['errors']).to be_empty
+      expect(json_response.dig('data', 'signUp', 'user', 'email')).to eq(valid_attributes[:email])
+      expect(json_response.dig('data', 'signUp', 'token')).to be_present
+      expect(json_response.dig('data', 'signUp', 'errors')).to be_empty
     end
 
     it 'does not register a user with invalid attributes' do
@@ -37,9 +37,9 @@ RSpec.describe 'SignUpMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['signUp']['user']).to be_nil
-      expect(json_response['data']['signUp']['token']).to be_nil
-      expect(json_response['data']['signUp']['errors']).to include("Password confirmation doesn't match Password")
+      expect(json_response.dig('data', 'signUp', 'user')).to be_nil
+      expect(json_response.dig('data', 'signUp', 'token')).to be_nil
+      expect(json_response.dig('data', 'signUp', 'errors')).to include("Password confirmation doesn't match Password")
     end
   end
 

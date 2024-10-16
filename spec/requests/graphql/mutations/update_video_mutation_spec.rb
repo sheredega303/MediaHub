@@ -12,7 +12,7 @@ RSpec.describe 'UpdateVideoMutation', type: :request do
   let!(:admin_token) { Warden::JWTAuth::UserEncoder.new.call(admin, :user, nil).first }
 
   describe 'update video' do
-    it 'update video by owner' do
+    it 'updates video by owner' do
       post '/graphql', params: {
         query: update_video_query(id: video.id, title: 'Updated Title',
                                   description: 'Updated Description', age_rating: 'PG-13')
@@ -21,8 +21,8 @@ RSpec.describe 'UpdateVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['updateVideo']['video']['title']).to eq('Updated Title')
-      expect(json_response['data']['updateVideo']['errors']).to be_empty
+      expect(json_response.dig('data', 'updateVideo', 'video', 'title')).to eq('Updated Title')
+      expect(json_response.dig('data', 'updateVideo', 'errors')).to be_empty
     end
 
     it 'updates video by manager' do
@@ -34,8 +34,8 @@ RSpec.describe 'UpdateVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['updateVideo']['video']['title']).to eq('Updated Title')
-      expect(json_response['data']['updateVideo']['errors']).to be_empty
+      expect(json_response.dig('data', 'updateVideo', 'video', 'title')).to eq('Updated Title')
+      expect(json_response.dig('data', 'updateVideo', 'errors')).to be_empty
     end
 
     it 'updates video by admin' do
@@ -47,8 +47,8 @@ RSpec.describe 'UpdateVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['updateVideo']['video']['title']).to eq('Updated Title')
-      expect(json_response['data']['updateVideo']['errors']).to be_empty
+      expect(json_response.dig('data', 'updateVideo', 'video', 'title')).to eq('Updated Title')
+      expect(json_response.dig('data', 'updateVideo', 'errors')).to be_empty
     end
 
     it 'returns error when user is not authorized' do
@@ -60,10 +60,10 @@ RSpec.describe 'UpdateVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'][0]['message']).to include('You have no access to this action')
+      expect(json_response.dig('errors', 0, 'message')).to include('You have no access to this action')
     end
 
-    it 'returns error when user has not permission to update video' do
+    it 'returns error when user has no permission to update video' do
       post '/graphql', params: {
         query: update_video_query(id: another_video.id, title: 'Updated Title',
                                   description: 'Updated Description', age_rating: 'PG-13')
@@ -72,7 +72,7 @@ RSpec.describe 'UpdateVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'][0]['message']).to include('You have no access to this action')
+      expect(json_response.dig('errors', 0, 'message')).to include('You have no access to this action')
     end
 
     it 'returns errors with invalid arguments' do
@@ -83,8 +83,8 @@ RSpec.describe 'UpdateVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['updateVideo']['video']).to be_nil
-      expect(json_response['data']['updateVideo']['errors']).not_to be_empty
+      expect(json_response.dig('data', 'updateVideo', 'video')).to be_nil
+      expect(json_response.dig('data', 'updateVideo', 'errors')).not_to be_empty
     end
 
     it 'returns error when video not found' do
@@ -96,7 +96,7 @@ RSpec.describe 'UpdateVideoMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'][0]['message']).to include('You have no access to this action')
+      expect(json_response.dig('errors', 0, 'message')).to include('You have no access to this action')
     end
   end
 

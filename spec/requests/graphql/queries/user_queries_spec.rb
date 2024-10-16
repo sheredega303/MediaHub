@@ -13,7 +13,7 @@ RSpec.describe 'UserQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['users'].size).to eq(6)
+      expect(json_response.dig('data', 'users').size).to eq(6)
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe 'UserQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['user']['email']).to eq(user.email)
+      expect(json_response.dig('data', 'user', 'email')).to eq(user.email)
     end
 
     it 'returns null for non-existent user' do
@@ -33,7 +33,7 @@ RSpec.describe 'UserQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['user']).to be_nil
+      expect(json_response.dig('data', 'user')).to be_nil
     end
   end
 
@@ -44,8 +44,8 @@ RSpec.describe 'UserQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['myProfile']['email']).to eq(user.email)
-      expect(json_response['data']['myProfile']['channelName']).to eq(user.channel_name)
+      expect(json_response.dig('data', 'myProfile', 'email')).to eq(user.email)
+      expect(json_response.dig('data', 'myProfile', 'channelName')).to eq(user.channel_name)
     end
 
     it 'returns null for un-authorization user' do
@@ -54,7 +54,7 @@ RSpec.describe 'UserQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['user']).to be_nil
+      expect(json_response.dig('data', 'myProfile')).to be_nil
     end
   end
 
@@ -69,7 +69,7 @@ RSpec.describe 'UserQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['searchUser'].size).to eq(2)
+      expect(json_response.dig('data', 'searchUser').size).to eq(2)
     end
   end
 
