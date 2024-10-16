@@ -175,6 +175,8 @@ GEM
     graphql (2.3.17)
       base64
       fiber-storage
+    graphql_playground-rails (2.1.0)
+      rails (>= 5.1.0)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -408,6 +410,7 @@ DEPENDENCIES
   fasterer
   graphiql-rails
   graphql
+  graphql_playground-rails
   importmap-rails
   jbuilder
   overcommit
