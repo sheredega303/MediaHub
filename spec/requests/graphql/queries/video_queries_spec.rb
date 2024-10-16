@@ -14,7 +14,7 @@ RSpec.describe 'VideoQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['videos'].size).to eq(3)
+      expect(json_response.dig('data', 'videos').size).to eq(3)
     end
   end
 
@@ -25,7 +25,7 @@ RSpec.describe 'VideoQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['video']['title']).to eq(video.title)
+      expect(json_response.dig('data', 'video', 'title')).to eq(video.title)
     end
 
     it 'returns null for non-existent video' do
@@ -34,7 +34,7 @@ RSpec.describe 'VideoQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['video']).to be_nil
+      expect(json_response.dig('data', 'video')).to be_nil
     end
   end
 
@@ -45,7 +45,7 @@ RSpec.describe 'VideoQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['myVideos'].size).to eq(user.videos.count)
+      expect(json_response.dig('data', 'myVideos').size).to eq(user.videos.count)
     end
 
     it 'returns null for un-authorization user' do
@@ -54,7 +54,7 @@ RSpec.describe 'VideoQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['myVideos']).to be_nil
+      expect(json_response.dig('data', 'myVideos')).to be_nil
     end
   end
 
@@ -69,7 +69,7 @@ RSpec.describe 'VideoQueries', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['searchVideo'].size).to eq(2)
+      expect(json_response.dig('data', 'searchVideo').size).to eq(2)
     end
   end
 

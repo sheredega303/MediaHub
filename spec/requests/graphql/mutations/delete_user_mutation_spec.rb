@@ -13,8 +13,8 @@ RSpec.describe 'DeleteUserMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['deleteUser']['status']).to eq(I18n.t('user_deleted'))
-      expect(json_response['data']['deleteUser']['errors']).to be_empty
+      expect(json_response.dig('data', 'deleteUser', 'status')).to eq(I18n.t('user_deleted'))
+      expect(json_response.dig('data', 'deleteUser', 'errors')).to be_empty
     end
 
     it 'delete user by admin' do
@@ -24,27 +24,27 @@ RSpec.describe 'DeleteUserMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['deleteUser']['status']).to eq(I18n.t('user_deleted'))
-      expect(json_response['data']['deleteUser']['errors']).to be_empty
+      expect(json_response.dig('data', 'deleteUser', 'status')).to eq(I18n.t('user_deleted'))
+      expect(json_response.dig('data', 'deleteUser', 'errors')).to be_empty
     end
 
-    it 'returns an not permission error' do
+    it 'returns a not permission error' do
       post '/graphql', params: { query: delete_user_query(admin.id) },
                        headers: { Authorization: "Bearer #{user_token}" }
 
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'][0]['message']).to include('You have no access to this action')
+      expect(json_response.dig('errors', 0, 'message')).to include('You have no access to this action')
     end
 
-    it 'returns an not authorized error' do
+    it 'returns a not authorized error' do
       post '/graphql', params: { query: delete_user_query(user.id) }
 
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'][0]['message']).to include('You have no access to this action')
+      expect(json_response.dig('errors', 0, 'message')).to include('You have no access to this action')
     end
   end
 

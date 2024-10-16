@@ -16,8 +16,8 @@ RSpec.describe 'UpdateUserMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['updateUser']['user']['channelName']).to eq(new_channel_name)
-      expect(json_response['data']['updateUser']['errors']).to be_empty
+      expect(json_response.dig('data', 'updateUser', 'user', 'channelName')).to eq(new_channel_name)
+      expect(json_response.dig('data', 'updateUser', 'errors')).to be_empty
     end
 
     it 'update the user channel name by admin' do
@@ -29,8 +29,8 @@ RSpec.describe 'UpdateUserMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['data']['updateUser']['user']['channelName']).to eq(new_channel_name)
-      expect(json_response['data']['updateUser']['errors']).to be_empty
+      expect(json_response.dig('data', 'updateUser', 'user', 'channelName')).to eq(new_channel_name)
+      expect(json_response.dig('data', 'updateUser', 'errors')).to be_empty
     end
 
     it 'returns errors when user does not have permission to update' do
@@ -40,7 +40,7 @@ RSpec.describe 'UpdateUserMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'][0]['message']).to include('You have no access to this action')
+      expect(json_response.dig('errors', 0, 'message')).to include('You have no access to this action')
     end
 
     it 'returns errors when user does not authorized' do
@@ -49,7 +49,7 @@ RSpec.describe 'UpdateUserMutation', type: :request do
       json_response = response.parsed_body
 
       expect(response).to have_http_status(:success)
-      expect(json_response['errors'][0]['message']).to include('You have no access to this action')
+      expect(json_response.dig('errors', 0, 'message')).to include('You have no access to this action')
     end
   end
 
