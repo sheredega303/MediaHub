@@ -8,9 +8,7 @@ class GraphqlController < ApplicationController
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
-    context = {
-      current_user: current_user
-    }
+    context = current_user
     result = MediaHubSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e
@@ -25,8 +23,15 @@ class GraphqlController < ApplicationController
     return if request.headers['Authorization'].blank?
 
     token = request.headers['Authorization'].split.last
+    return if JwtDenylist.revoked?(token)
+
     user_id = JWT.decode(token, ENV.fetch('JWT_SECRET_KEY') { nil })[0]['sub']
-    User.find_by(id: user_id)
+    user = User.find_by(id: user_id)
+
+    {
+      current_user: user,
+      token: user ? token : nil # its need for sign_out, cuz I cant take it from request. inside mutation
+    }
   end
 
   # Handle variables in form data, JSON body, or a blank value
