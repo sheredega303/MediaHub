@@ -4,3 +4,5 @@ en:
   video_deleted: "Video was successful deleted"
   user_deleted: "User was successful deleted"
   no_access: "You have no access to this action"
+  sign_out: "You logged out"
+  sign_out_error: "You are not logged in"
