@@ -13,7 +13,7 @@ module Types
       if Rails.env.test?
         Rails.application.routes.url_helpers.rails_blob_path(object.file, only_path: true)
       else
-        object.file.url
+        Rails.application.routes.url_helpers.rails_blob_url(object.file, host: 'localhost', port: 3000)
       end
     end
 
