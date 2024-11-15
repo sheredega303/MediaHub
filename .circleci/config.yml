@@ -20,11 +20,6 @@ jobs:
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
-      PGHOST: 127.0.0.1
-      PGUSER: postgres
-      PGPASSWORD: "123123"
-      RAILS_ENV: test
-      JWT_SECRET_KEY: test
     steps:
       - checkout
       - ruby/install-deps
