@@ -1,8 +1,84 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.0
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - node_modules/**/*
+    - vendor/**/*
+    - spec/fixtures/**/*
+    - tmp/**/*
+    - config/environments/*
+    - config/initializers/rswag-ui.rb
+    - config/initializers/rswag_api.rb
+    - config/initializers/rswag-ui.rb
+    - lib/tasks/auto_annotate_models.rake
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/GlobalStdStream:
+  Enabled: false
+
+Style/RedundantFetchBlock:
+  Enabled: false
+
+Style/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/ApplicationController:
+  Enabled: false
+
+Rails/EnvironmentVariableAccess:
+  Enabled: false
+
+Naming/MethodParameterName:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/AbcSize:
+  Max: 25
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/BlockLength:
+  Exclude:
+    - config/*
+    - spec/**/*
+    - config/routes.rb
+    - app/admin/*
+
+RSpec/ExampleLength:
+  Max: 20
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+
+RSpec/MultipleExpectations:
+  Max: 6
+
+RSpec/VariableName:
+  Enabled: false
+
+RSpec/EmptyExampleGroup:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
