@@ -3,13 +3,13 @@
 The setups steps expect following tools installed on the system.
 
 - Github
-- Ruby [3.2.0](https://github.com/sheredega303/media_hub/blob/main/.ruby-version)
-- Rails [7.2.1](https://github.com/sheredega303/media_hub/blob/main/Gemfile)
+- Ruby [3.2.0](https://github.com/sheredega303/MediaHub/blob/main/.ruby-version)
+- Rails [7.2.1](https://github.com/sheredega303/MediaHub/blob/main/Gemfile)
 
 ##### 1. Check out the repository
 
 ```bash
-git clone git@github.com:sheredega303/media_hub.git
+git clone git@github.com:sheredega303/MediaHub.git
 ```
 
 ##### 2. Create and setup the database
